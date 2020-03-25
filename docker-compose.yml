@@ -5,10 +5,12 @@ services:
         image: tryton/tryton
         ports:
          - '8000:8000'
-        depends_on:
-         - db
- 
-    db:
+        link:
+         - tryton-postgres:postgres
+         environment:
+         - DB_PASSWORD=tryton
+          
+    tryton-postgres:
         image: postgres
         environment:
          - POSTGRES_USER=tryton
