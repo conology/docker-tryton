@@ -6,7 +6,7 @@ services:
         ports:
          - '8000:8000'
         links:
-         - 'tryton-postgres:postgres'
+         - "tryton-postgres:postgres"
         environment:
          - DB_PASSWORD=tryton
           
