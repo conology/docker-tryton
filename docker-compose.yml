@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+
+    tryton:
+	image: tryton/tryton
+        ports:
+         - '8000:8000'
+	depends_on:
+	 - db
+	
+
+    db:
+	image: postgres
+	environment:
+	 - POSTGRES_USER=tryton
+	 - POSTGRES_PASSWORD=tryton
+         - POSTGRES_DB=tryton
