@@ -1,10 +1,8 @@
 version: '3.3'
 
 services:
-    tryton-postgres:
+    postgres:
         image: postgres
-        ports:
-         - '5432:5432'
         environment:
          - POSTGRES_PASSWORD=password
          - POSTGRES_DB=tryton
@@ -13,10 +11,8 @@ services:
         image: tryton/tryton
         ports:
          - '8000:8000'
-        links:
-         - tryton-postgres:postgres
         depends_on:
-         - tryton-postgres
+         - postgres
         environment:
          - DB_USER=user
          - DB_PASSWORD=password
