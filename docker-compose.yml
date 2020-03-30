@@ -1,12 +1,6 @@
 version: '3.3'
 
 services:
-    postgres:
-        image: postgres
-        environment:
-         - POSTGRES_PASSWORD=password
-         - POSTGRES_DB=tryton
-    
     tryton:
         image: tryton/tryton
         ports:
@@ -18,3 +12,13 @@ services:
          - DB_PASSWORD=password
          - DB_HOSTNAME=tryton-postgres
          - DB_PORT=5432
+         
+    postgres:
+        image: postgres
+        ports:
+         - '5432:5432'
+        environment:
+         - POSTGRES_USER=user
+         - POSTGRES_PASSWORD=password
+         - POSTGRES_DB=tryton
+    
