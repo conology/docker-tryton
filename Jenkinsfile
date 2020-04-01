@@ -17,6 +17,6 @@ node {
     }*/
     
     stage ('Configure') {
-        sh 'docker run --link tryton-postgres:postgres -e DB_PASSWORD=password -it tryton/tryton trytond-admin -d tryton --all'
+        sh 'docker run --link tryton-postgres:postgres -e DB_PASSWORD=password tryton/tryton trytond-admin -d tryton --all'
     }
 }
