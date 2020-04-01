@@ -4,19 +4,19 @@ node {
         
     stage ('Checkout'){
         checkout scm
-    }/*
+    }
     stage ('Build'){
         
-        sh 'echo Starting build of odoo'
-        customImage = docker.build("jhg_odoo:${env.BUILD_ID}","./Odoo")
-    }*/
+        sh 'echo Deploying Env'
+        sh 'docker-compose up -d --build'
+    }/*
     stage ('Deploy') {
         
         sh 'echo Deploying Env'
         sh 'docker-compose up -d --build'
-    }
-    /*
-    stage ('Configure') {
-      
     }*/
+    
+    stage ('Configure') {
+        sh 'docker run --link tryton-postgres:postgres -e DB_PASSWORD=password -it tryton/tryton trytond-admin -d tryton --all'
+    }
 }
