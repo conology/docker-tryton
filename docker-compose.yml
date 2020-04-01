@@ -1,22 +1,40 @@
-version: '3.3'
-
+version: "2"
 services:
+    postgres:
+        image: postgres
+        container_name: postgres
+        environment:
+            POSTGRES_USER: "tryton"
+            POSTGRES_PASSWORD: "password"
+            POSTGRES_DB: "tryton-test"
+        volumes:
+            - db-data:/var/lib/postgresql/data
     tryton:
         image: tryton/tryton
-        ports:
-         - '8000:8000'
+        container_name: tryton
         depends_on:
-         - tryton-postgres
+            - postgres
         environment:
-         - DB_USER=user
-         - DB_PASSWORD=password
-         - DB_HOSTNAME=postgres
-         - DB_PORT=5432
-         
-    tryton-postgres:
-        image: postgres
+            DB_USER: "tryton"
+            DB_PASSWORD: "password"
+            DB_HOSTNAME: "postgres"
+        volumes:
+            - tryton-data:/var/lib/trytond/db
+        ports:
+            - "8000:8000"
+    trytond-conf:
+        image: tryton/tryton
+        container_name: trytond-conf
+        command: trytond-admin -d tryton-test --all -vv
+        restart: "no"
+        depends_on:
+            - postgres
         environment:
-         - POSTGRES_USER=user
-         - POSTGRES_PASSWORD=password
-         - POSTGRES_DB=tryton
-    
+            DB_USER: "tryton"
+            DB_PASSWORD: "password"
+            DB_HOSTNAME: "postgres"
+
+volumes:
+    db-data:
+    tryton-data:
+
