@@ -12,6 +12,7 @@ services:
     tryton:
         image: tryton/tryton
         container_name: tryton
+        command: trytond-admin -d tryton-test --all -vv
         depends_on:
             - postgres
         environment:
@@ -23,17 +24,6 @@ services:
             - tryton-data:/var/lib/trytond/db
         ports:
             - "8000:8000"
-    trytond-conf:
-        image: tryton/tryton
-        container_name: trytond-conf
-        command: trytond-admin -d tryton-test --all -vv
-        restart: "no"
-        depends_on:
-            - postgres
-        environment:
-            DB_USER: "tryton"
-            DB_PASSWORD: "password"
-            DB_HOSTNAME: "postgres"
 
 volumes:
     db-data:
