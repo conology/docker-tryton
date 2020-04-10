@@ -11,6 +11,7 @@ services:
     tryton:
         image: tryton/tryton
         container_name: tryton
+        command: trytond-admin -d tryton-test --all -vv
         depends_on:
             - postgres
         environment:
