@@ -15,7 +15,6 @@ services:
         depends_on:
             - postgres
         environment:
-            TRYTOND_DATABASE_URI: postgresql://tryton:password@postgres:5432/
             DB_USER: "tryton"
             DB_PASSWORD: "password"
             DB_HOSTNAME: "postgres"
@@ -31,6 +30,7 @@ services:
         depends_on:
             - postgres
         environment:
+            TRYTOND_DATABASE_URI: postgresql://tryton:password@postgres:5432/
             DB_USER: "tryton"
             DB_PASSWORD: "password"
             DB_HOSTNAME: "postgres"
