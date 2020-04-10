@@ -4,8 +4,8 @@ services:
         image: postgres
         container_name: postgres
         environment:
-            POSTGRES_USER: "tryton"
-            POSTGRES_PASSWORD: "password"
+            POSTGRES_USER: "triton"
+            POSTGRES_PASSWORD: "triton"
             POSTGRES_DB: "tryton-test"
 
     tryton:
@@ -15,9 +15,9 @@ services:
         depends_on:
             - postgres
         environment:
-            TRYTOND_DATABASE_URI: postgresql://tryton:password@postgres:5432/
-            DB_USER: "tryton"
-            DB_PASSWORD: "password"
+            TRYTOND_DATABASE_URI: postgresql://triton:triton@postgres:5432/
+            DB_USER: "triton"
+            DB_PASSWORD: "triton"
             DB_HOSTNAME: "postgres"
         ports:
             - "8000:8000"
