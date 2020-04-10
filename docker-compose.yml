@@ -7,12 +7,10 @@ services:
             POSTGRES_USER: "tryton"
             POSTGRES_PASSWORD: "password"
             POSTGRES_DB: "tryton-test"
-        volumes:
-            - db-data:/var/lib/postgresql/data
+
     tryton:
         image: tryton/tryton
         container_name: tryton
-        command: trytond-admin -d tryton-test --all -vv
         depends_on:
             - postgres
         environment:
@@ -20,12 +18,5 @@ services:
             DB_USER: "tryton"
             DB_PASSWORD: "password"
             DB_HOSTNAME: "postgres"
-        volumes:
-            - tryton-data:/var/lib/trytond/db
         ports:
             - "8000:8000"
-
-volumes:
-    db-data:
-    tryton-data:
-
